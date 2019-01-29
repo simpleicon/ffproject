@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
   <head>
-
+	<script src="http://code.jquery.com/jquery.min.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -18,7 +19,20 @@
 
     <!-- Custom styles for this template -->
     <link href="${pageContext.request.contextPath}/resources/css/shop-item.css" rel="stylesheet" type="text/css">
-
+	
+	
+	<script>
+	$( document ).ready(function() {
+	    console.log( "ready!" );
+	    var sBtn = $(".list-group-item");    //  ul > li 이를 sBtn으로 칭한다. (클릭이벤트는 li에 적용 된다.)
+	     sBtn.click(function(){   // sBtn에 속해 있는  a 찾아 클릭 하면.
+	     sBtn.removeClass("active");     // sBtn 속에 (active) 클래스를 삭제 한다.
+	     $(this).addClass("active"); // 클릭한 a에 (active)클래스를 넣는다.
+	    })
+	});
+	 
+	</script>
+	
   </head>
 
   <body>
@@ -59,9 +73,9 @@
         <div class="col-lg-3">
           <h1 class="my-4">Shop Name</h1>
           <div class="list-group">
-            <a href="#" class="list-group-item active">Category 1</a>
-            <a href="#" class="list-group-item">Category 2</a>
-            <a href="#" class="list-group-item">Category 3</a>
+            <a href="#" class="col-lg-4 list-group-item active">Category 1</a>
+            <a href="#" class="col-lg-4 list-group-item">Category 2</a>
+            <a href="#" class="col-lg-4 list-group-item">Category 3</a>
           </div>
         </div>
         <!-- /.col-lg-3 -->
@@ -116,8 +130,10 @@
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="resources/vendor/jquery/jquery.min.js"></script>
-    <script src="resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="/fleet/resources/vendor/jquery/jquery.min.js"></script> -->
+    <script src="<c:url value="/resources/vendor/jquery/jquery.min.js"/>"></script>
+    <!-- <script src="/fleet/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+    <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"/>"></script>
 
   </body>
 
