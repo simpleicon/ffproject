@@ -32,7 +32,6 @@ public class MainController {
 	public ModelAndView main() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("main");
-		
 		return mav;
 	}
 	

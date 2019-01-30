@@ -24,11 +24,31 @@
 	<script>
 		$( document ).ready(function() {
 		    console.log( "ready!" );
-		    var sBtn = $(".list-group-item");    //  ul > li 이를 sBtn으로 칭한다. (클릭이벤트는 li에 적용 된다.)
-		     sBtn.click(function(){   // sBtn에 속해 있는  a 찾아 클릭 하면.
-		     sBtn.removeClass("active");     // sBtn 속에 (active) 클래스를 삭제 한다.
-		     $(this).addClass("active"); // 클릭한 a에 (active)클래스를 넣는다.
+		    
+		    //list-group-item active 설정
+		    var lBtn = $(".list-group-item");    //  ul > li 이를 sBtn으로 칭한다. (클릭이벤트는 li에 적용 된다.)
+		    lBtn.click(function(){   // sBtn에 속해 있는  a 찾아 클릭 하면.
+		     	lBtn.removeClass("active");     // sBtn 속에 (active) 클래스를 삭제 한다.
+		     	$(this).addClass("active"); // 클릭한 a에 (active)클래스를 넣는다.
+		     	console.log($(this).val());
 		    })
+		    
+		    //Ajax list group display
+		    function getListGroup(item){
+		    	var url = "listGroup.can?item="+item;
+		    	
+		    	$.ajax({
+		    		url : url,
+		    		success : function(){
+		    			
+		    		},
+		    		error : function(){
+		    			
+		    		}
+		    	})
+		    };
+		    
+		    
 		});
 		
 		
@@ -76,15 +96,16 @@
           <h1 class="my-4">Shop Name</h1>
           <!--  -->
           <div class="list-group">
-            <a href="#" class="col-lg-4 list-group-item active">Car</a>
-            <a href="#" class="col-lg-4 list-group-item">Event</a>
-            <a href="#" class="col-lg-4 list-group-item">History</a>
+            <button class="col-lg-4 list-group-item active" value="carlist">Car</button>
+            <button class="col-lg-4 list-group-item" value="carevent">Event</button>
+            <button class="col-lg-4 list-group-item" value="carhistory">History</button>
+            
           </div>
           
     <!-- 리스트 출력 -->
 				<c:choose>
-					<c:when test="${center !=null }">
-						<jsp:include page="${center }.jsp"/>
+					<c:when test="${listGroup !=null }">
+						<jsp:include page="${listGroup }.jsp"/>
 					</c:when>
 					<c:otherwise>
 						<jsp:include page="carList.jsp"/>
