@@ -1,6 +1,7 @@
 package com.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,14 @@ public class MainController {
 	public ModelAndView main() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("main");
+		return mav;
+	}
+	
+	@RequestMapping("/listgroup")
+	public ModelAndView listgroup(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+		String item = req.getParameter("item");
+		mav.setViewName(item);
 		return mav;
 	}
 	

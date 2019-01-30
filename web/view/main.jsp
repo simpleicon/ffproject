@@ -27,32 +27,32 @@
 		    
 		    //list-group-item active 설정
 		    var lBtn = $(".list-group-item");    //  ul > li 이를 sBtn으로 칭한다. (클릭이벤트는 li에 적용 된다.)
-		    lBtn.click(function(){   // sBtn에 속해 있는  a 찾아 클릭 하면.
+		    lBtn.click(function(){   			// sBtn에 속해 있는  a 찾아 클릭 하면.
 		     	lBtn.removeClass("active");     // sBtn 속에 (active) 클래스를 삭제 한다.
-		     	$(this).addClass("active"); // 클릭한 a에 (active)클래스를 넣는다.
+		     	$(this).addClass("active"); 	// 클릭한 a에 (active)클래스를 넣는다.
 		     	console.log($(this).val());
+		     	getListGroup($(this).val());
 		    })
+		    
 		    
 		    //Ajax list group display
 		    function getListGroup(item){
-		    	var url = "listGroup.can?item="+item;
-		    	
+		    	var url = "listgroup.can?item="+item;
 		    	$.ajax({
 		    		url : url,
-		    		success : function(){
-		    			
+		    		success : function(data){
+		    			$('#listgroupitem').html(data); 
 		    		},
 		    		error : function(){
-		    			
+		    			alert('error');
 		    		}
 		    	})
 		    };
 		    
+		    getListGroup('carList');
 		    
 		});
 		
-		
-	 
 	</script>
 	
   </head>
@@ -93,24 +93,16 @@
       <div class="row">
 		
         <div class="col-lg-3">
-          <h1 class="my-4">Shop Name</h1>
+          <!-- <h1 class="my-4">Shop Name</h1> -->
           <!--  -->
-          <div class="list-group">
-            <button class="col-lg-4 list-group-item active" value="carlist">Car</button>
-            <button class="col-lg-4 list-group-item" value="carevent">Event</button>
-            <button class="col-lg-4 list-group-item" value="carhistory">History</button>
-            
+          <div class="list-group mt-4">
+            <button class="col-lg-4 list-group-item active" value="carList">Car</button>
+            <button class="col-lg-4 list-group-item" value="carEvents">Event</button>
+            <button class="col-lg-4 list-group-item" value="carHistory">History</button>
           </div>
           
     <!-- 리스트 출력 -->
-				<c:choose>
-					<c:when test="${listGroup !=null }">
-						<jsp:include page="${listGroup }.jsp"/>
-					</c:when>
-					<c:otherwise>
-						<jsp:include page="carList.jsp"/>
-					</c:otherwise>
-				</c:choose>
+    		<div id="listgroupitem"></div>
 	<!-- 리스트 출력 -->
           
         </div>
@@ -119,7 +111,6 @@
         <div class="col-lg-9">
 
           <div class="card mt-4">
-            <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
             <div class="card-body">
               <h3 class="card-title">Product Name</h3>
               <h4>$24.99</h4>
@@ -129,7 +120,31 @@
             </div>
           </div>
           <!-- /.card -->
-
+		  <div class="card card-outline-secondary my-4">
+				<div class="card-header">Car List</div>
+				<div class="card-body">
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis
+						et enim aperiam inventore, similique necessitatibus neque non!
+						Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi
+						mollitia, necessitatibus quae sint natus.</p>
+					<small class="text-muted">Posted by Anonymous on 3/1/17</small>
+					<hr>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis
+						et enim aperiam inventore, similique necessitatibus neque non!
+						Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi
+						mollitia, necessitatibus quae sint natus.</p>
+					<small class="text-muted">Posted by Anonymous on 3/1/17</small>
+					<hr>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis
+						et enim aperiam inventore, similique necessitatibus neque non!
+						Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi
+						mollitia, necessitatibus quae sint natus.</p>
+					<small class="text-muted">Posted by Anonymous on 3/1/17</small>
+					<hr>
+					<a href="#" class="btn btn-success">Leave a Review</a>
+				</div>
+			</div>
+			<!-- /.card -->	
           
 
         </div>
