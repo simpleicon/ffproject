@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,49 +11,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Main Page</title>
+    <title>Login Page</title>
 
     <!-- Bootstrap core CSS -->
     <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template -->
     <link href="${pageContext.request.contextPath}/resources/css/shop-item.css" rel="stylesheet" type="text/css">
-	
-	
-	<script>
-		$( document ).ready(function() {
-		    console.log( "ready!" );
-		    
-		    //list-group-item active 설정
-		    var lBtn = $(".list-group-item");    //  ul > li 이를 sBtn으로 칭한다. (클릭이벤트는 li에 적용 된다.)
-		    lBtn.click(function(){   // sBtn에 속해 있는  a 찾아 클릭 하면.
-		     	lBtn.removeClass("active");     // sBtn 속에 (active) 클래스를 삭제 한다.
-		     	$(this).addClass("active"); // 클릭한 a에 (active)클래스를 넣는다.
-		     	console.log($(this).val());
-		    })
-		    
-		    //Ajax list group display
-		    function getListGroup(item){
-		    	var url = "listGroup.can?item="+item;
-		    	
-		    	$.ajax({
-		    		url : url,
-		    		success : function(){
-		    			
-		    		},
-		    		error : function(){
-		    			
-		    		}
-		    	})
-		    };
-		    
-		    
-		});
-		
-		
-	 
-	</script>
-	
+  	
   </head>
 
   <body>
@@ -62,22 +26,19 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#">Main Page</a>
+        <a class="navbar-brand" href="#">Start Page</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home
-                <span class="sr-only">(current)</span>
+            <li class="nav-item">
+              <a class="nav-link" href="registerpage.can">관리자 등록
+                <!-- <span class="sr-only">(current)</span> -->
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Services</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Contact</a>
@@ -88,53 +49,43 @@
     </nav>
 
     <!-- Page Content -->
-    <div class="container">
+    <div class="container loginpage bg-dark">
 
       <div class="row">
-		
-        <div class="col-lg-3">
-          <h1 class="my-4">Shop Name</h1>
-          <!--  -->
-          <div class="list-group">
-            <button class="col-lg-4 list-group-item active" value="carlist">Car</button>
-            <button class="col-lg-4 list-group-item" value="carevent">Event</button>
-            <button class="col-lg-4 list-group-item" value="carhistory">History</button>
-            
-          </div>
-          
-    <!-- 리스트 출력 -->
-				<c:choose>
-					<c:when test="${listGroup !=null }">
-						<jsp:include page="${listGroup }.jsp"/>
-					</c:when>
-					<c:otherwise>
-						<jsp:include page="carList.jsp"/>
-					</c:otherwise>
-				</c:choose>
-	<!-- 리스트 출력 -->
-          
-        </div>
-        <!-- /.col-lg-3 -->
-
-        <div class="col-lg-9">
-
+		<div class="col-lg-3"></div>
+        <div class="col-lg-6">
           <div class="card mt-4">
             <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
             <div class="card-body">
-              <h3 class="card-title">Product Name</h3>
-              <h4>$24.99</h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!</p>
-              <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-              4.0 stars
+            
+            <!-- Login Form -->
+            <form action="/login.can">
+            <div class="row">
+              <div class="col-lg-3"></div>	
+              <label class="col-lg-2 card-title">ID</label>
+  			  <input class="col-lg-4 " type="text" name="id" placeholder="your id">
+  			  <div class="col-lg-3"></div>
+  			</div>
+  			<div class="row">
+  			  <div class="col-lg-3"></div>            	
+              <label class="col-lg-2 card-title">PW</label>
+              <input class="col-lg-4" type="password" name="pw" placeholder="your password">
+              <div class="col-lg-3"></div>
+            </div>
+            <div class="row">
+              <div class="col-lg-3"></div>
+              <input class="col-lg-6" type="submit" value="Login">
+              <div class="col-lg-3"></div>
+            </div>
+              <p class="card-text"></p>
+            </form>
+            <!-- /Login Form -->
+            
             </div>
           </div>
           <!-- /.card -->
-
-          
-
         </div>
-        <!-- /.col-lg-9 -->
-
+        <div class="col-lg-3"></div>
       </div>
 
     </div>
