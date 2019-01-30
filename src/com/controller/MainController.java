@@ -13,13 +13,32 @@ public class MainController {
 	@Resource(name="cbiz")
 	Biz biz;
 	
-	@RequestMapping("/main.can")
+	
+	@RequestMapping("/registerpage")
+	public ModelAndView register() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("registerpage");
+		return mav;
+	}
+	
+	@RequestMapping("/loginpage")
+	public ModelAndView login() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("loginpage");
+		return mav;
+	}
+	
+	@RequestMapping("/main")
 	public ModelAndView main() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("main");
 		
 		return mav;
 	}
+	
+	
+	
+	
 	
 	
 }
