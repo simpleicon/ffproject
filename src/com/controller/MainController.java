@@ -17,14 +17,14 @@ public class MainController {
 	@RequestMapping("/registerpage")
 	public ModelAndView register() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("registerpage");
+		mav.setViewName("registerPage");
 		return mav;
 	}
 	
 	@RequestMapping("/loginpage")
 	public ModelAndView login() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("loginpage");
+		mav.setViewName("loginPage");
 		return mav;
 	}
 	

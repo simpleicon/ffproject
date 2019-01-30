@@ -88,7 +88,7 @@
             </div>
             <div class="row">
               <div class="col-lg-3"></div>
-              <input class="col-lg-6" type="submit" value="Register">
+              <input class="col-lg-6" type="submit" value="등록하기">
               <div class="col-lg-3"></div>
             </div>
               <p class="card-text"></p>

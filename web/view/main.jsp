@@ -22,14 +22,16 @@
 	
 	
 	<script>
-	$( document ).ready(function() {
-	    console.log( "ready!" );
-	    var sBtn = $(".list-group-item");    //  ul > li 이를 sBtn으로 칭한다. (클릭이벤트는 li에 적용 된다.)
-	     sBtn.click(function(){   // sBtn에 속해 있는  a 찾아 클릭 하면.
-	     sBtn.removeClass("active");     // sBtn 속에 (active) 클래스를 삭제 한다.
-	     $(this).addClass("active"); // 클릭한 a에 (active)클래스를 넣는다.
-	    })
-	});
+		$( document ).ready(function() {
+		    console.log( "ready!" );
+		    var sBtn = $(".list-group-item");    //  ul > li 이를 sBtn으로 칭한다. (클릭이벤트는 li에 적용 된다.)
+		     sBtn.click(function(){   // sBtn에 속해 있는  a 찾아 클릭 하면.
+		     sBtn.removeClass("active");     // sBtn 속에 (active) 클래스를 삭제 한다.
+		     $(this).addClass("active"); // 클릭한 a에 (active)클래스를 넣는다.
+		    })
+		});
+		
+		
 	 
 	</script>
 	
@@ -40,7 +42,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#">Start Bootstrap</a>
+        <a class="navbar-brand" href="#">Main Page</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -69,14 +71,27 @@
     <div class="container">
 
       <div class="row">
-
+		
         <div class="col-lg-3">
           <h1 class="my-4">Shop Name</h1>
+          <!--  -->
           <div class="list-group">
-            <a href="#" class="col-lg-4 list-group-item active">Category 1</a>
-            <a href="#" class="col-lg-4 list-group-item">Category 2</a>
-            <a href="#" class="col-lg-4 list-group-item">Category 3</a>
+            <a href="#" class="col-lg-4 list-group-item active">Car</a>
+            <a href="#" class="col-lg-4 list-group-item">Event</a>
+            <a href="#" class="col-lg-4 list-group-item">History</a>
           </div>
+          
+    <!-- 리스트 출력 -->
+				<c:choose>
+					<c:when test="${center !=null }">
+						<jsp:include page="${center }.jsp"/>
+					</c:when>
+					<c:otherwise>
+						<jsp:include page="carList.jsp"/>
+					</c:otherwise>
+				</c:choose>
+	<!-- 리스트 출력 -->
+          
         </div>
         <!-- /.col-lg-3 -->
 
@@ -94,24 +109,7 @@
           </div>
           <!-- /.card -->
 
-          <div class="card card-outline-secondary my-4">
-            <div class="card-header">
-              Product Reviews
-            </div>
-            <div class="card-body">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-              <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-              <hr>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-              <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-              <hr>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-              <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-              <hr>
-              <a href="#" class="btn btn-success">Leave a Review</a>
-            </div>
-          </div>
-          <!-- /.card -->
+          
 
         </div>
         <!-- /.col-lg-9 -->
