@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.AdminMapper">
+	
+	<select id="select" parameterType="INTEGER" resultType="admin">
+		SELECT * FROM TB_ADMIN WHERE A_ID=#{obj}
+	</select>
+	<select id="selectall" resultType="admin">
+		SELECT * FROM TB_ADMIN WHERE ROWNUM <![CDATA[<=]]>12 ORDER BY REGDATE 
+	</select>
+	<insert id="insert" parameterType="admin">
+		INSERT INTO TB_ADMIN VALUES (#{a_id},#{a_pw},#{a_name},1)
+	</insert>
+	<update id="update" parameterType="admin">
+	
+	</update>
+	<delete id="delete" parameterType="INTEGER">
+		DELETE FROM PRODUCT WHERE PID=#{obj}
+	</delete>
+	
+</mapper>
+
+
+
+
+
+

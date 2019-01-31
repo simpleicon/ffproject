@@ -59,17 +59,17 @@
             <div class="card-body">
             
             <!-- Login Form -->
-            <form action="/login.can">
+            <form action="login.can" method="POST">
             <div class="row">
               <div class="col-lg-3"></div>	
               <label class="col-lg-2 card-title">ID</label>
-  			  <input class="col-lg-4 " type="text" name="id" placeholder="your id">
+  			  <input class="col-lg-4 " type="text" name="a_id" placeholder="your id">
   			  <div class="col-lg-3"></div>
   			</div>
   			<div class="row">
   			  <div class="col-lg-3"></div>            	
               <label class="col-lg-2 card-title">PW</label>
-              <input class="col-lg-4" type="password" name="pw" placeholder="your password">
+              <input class="col-lg-4" type="password" name="a_pw" placeholder="your password">
               <div class="col-lg-3"></div>
             </div>
             <div class="row">

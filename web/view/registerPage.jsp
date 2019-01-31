@@ -11,13 +11,68 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Login Page</title>
+    <title>Register Page</title>
 
     <!-- Bootstrap core CSS -->
     <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template -->
     <link href="${pageContext.request.contextPath}/resources/css/shop-item.css" rel="stylesheet" type="text/css">
+  	
+  	
+  	<script>
+		$( document ).ready(function() {
+		    console.log('asdf');
+		    //Ajax list group display
+		    function idCheck(a_id){
+		    	var url = "duplcheck.can?a_id="+a_id;
+		    	$.ajax({
+		    		
+		    		url : url,
+		    		success : function(data){
+		    			alert(data);
+		    			if(data == 0){
+		    				$('#idcheckmsg').html('가능');	
+		    			} else{
+		    				$('#idcheckmsg').html('불가능');
+		    				$('#a_id').val('');
+		    				$('#a_id').focus();
+		    				
+		    			} 
+		    		},
+		    		error : function(){
+		    			alert('error');
+		    		}
+		    	})
+		    };
+		    
+		    
+		    $('#chkbtn').click(function(){
+		    	if(($('#a_id').val()).length > 4){
+			     	idCheck($('#a_id').val());
+		    	} else{
+		    		alert('계정명이 너무 짧습니다.');
+		    		$('#a_id').focus();
+		    	}
+		    })
+		    
+		    $('#pwchk').blur(function(){
+		    	
+		    	if($('#pw').val() != $('#pwchk').val()){
+		    		$('#pwchkmsg').html('비밀번호가 일치하지 않습니다.');
+		    		$('#pwchk').val('');
+		    		
+		    	}else{
+		    		$('#pwchkmsg').html('비밀번호 일치');
+		    	}
+		    })
+		    
+		    
+		});
+		
+	</script>
+  	
+  	
   	
   </head>
 
@@ -62,28 +117,29 @@
             <form action="register.can">
             <div class="row">
               <div class="col-lg-3"></div>	
-              <label class="col-lg-2 card-title">ID</label>
-  			  <input class="col-lg-4 " type="text" name="id" placeholder="your id">
-  			  <div class="col-lg-3">
-  			  	<input type="button" value="중복체크"> 
+              <label class="col-lg-2 card-title">계정명</label>
+  			  <input class="col-lg-4 " type="text" name="a_id" id="a_id" placeholder="your id">
+  			  <small class="col-lg-1" id="idcheckmsg"></small>
+  			  <div class="col-lg-2">
+  			  	<input type="button" id="chkbtn" value="중복체크"> 
   			  </div>
   			</div>
   			<div class="row">
   			  <div class="col-lg-3"></div>            	
-              <label class="col-lg-2 card-title">PW</label>
-              <input class="col-lg-4" type="password" name="pw" placeholder="your password">
+              <label class="col-lg-2 card-title">비밀번호</label>
+              <input class="col-lg-4" type="password" name="a_pw" id="pw" placeholder="your password">
               <div class="col-lg-3"></div>
             </div>
             <div class="row">
   			  <div class="col-lg-3"></div>            	
-              <label class="col-lg-2 card-title">PW check</label>
-              <input class="col-lg-4" type="password" name="pwcheck" placeholder="password check">
-              <div class="col-lg-3"></div>
+              <label class="col-lg-2 card-title">비밀번호 확인</label>
+              <input class="col-lg-4" type="password" name="pwcheck" id="pwchk" placeholder="password check">
+              <small class="col-lg-3" id="pwchkmsg"></small>
             </div>
             <div class="row">
   			  <div class="col-lg-3"></div>            	
-              <label class="col-lg-2 card-title">NAME</label>
-              <input class="col-lg-4" type="text" name="name" placeholder="your name">
+              <label class="col-lg-2 card-title">이름</label>
+              <input class="col-lg-4" type="text" name="a_name" placeholder="your name">
               <div class="col-lg-3"></div>
             </div>
             <div class="row">
