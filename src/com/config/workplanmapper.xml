@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.WorkPlanMapper">
+	
+	<select id="select" parameterType="String" resultType="workplan">
+		SELECT * FROM TB_WORK_PLAN WHERE PLAN_NUM=#{obj}
+	</select>
+	<select id="selectall" resultType="workplan">
+		SELECT * FROM TB_WORK_PLAN 
+	</select>
+	<insert id="insert" parameterType="workplan">
+		INSERT INTO TB_WORK_PLAN VALUES (SEQ_PLAN.NEXTVAL, #{car_id},#{a_id},#{p_location_x},#{p_location_y}, #{p_load}, SYSDATE)
+	</insert>
+	<update id="update" parameterType="workplan">
+		UPDATE TB_WORK_PLAN SET P_LOCATION_X=#{p_location_x},P_LOCATION_Y=#{p_location_y},P_LOAD=#{p_load} WHERE PLAN_NUM=#{plan_num}
+	</update>
+	<delete id="delete" parameterType="String">
+		DELETE FROM TB_WORK_PLAN WHERE PLAN_NUM=#{obj}
+	</delete>
+	
+</mapper>
+
+
+
+
+
+

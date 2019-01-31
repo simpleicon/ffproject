@@ -5,11 +5,15 @@ PUBLIC "-//mybatis.org/DTD Config 3.0//EN"
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.vo.Car" alias="car"/>
+		<typeAlias type="com.vo.WorkPlan" alias="workplan"/>
+		<typeAlias type="com.vo.WorkHistory" alias="workhistory"/>
 		
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="com/config/carmapper.xml"/>
+		<mapper resource="com/config/workplanmapper.xml"/>
+		<mapper resource="com/config/workhistorymapper.xml"/>
 		
 	</mappers>
 </configuration>

@@ -4,20 +4,20 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mapper.CarMapper">
 	
-	<select id="select" parameterType="INTEGER" resultType="car">
-		SELECT * FROM CAR WHERE CAR_ID=#{obj}
+	<select id="select" parameterType="String" resultType="car">
+		SELECT * FROM TB_CAR WHERE CAR_ID=#{obj}
 	</select>
 	<select id="selectall" resultType="car">
-		SELECT * FROM PRODUCT WHERE ROWNUM <![CDATA[<=]]>12 ORDER BY REGDATE 
+		SELECT * FROM TB_CAR 
 	</select>
 	<insert id="insert" parameterType="car">
-		INSERT INTO PRODUCT VALUES (PRO_SEQ.NEXTVAL,#{pname},#{p_code},#{unit_price},sysdate,#{inventory},#{p_imgname})
+		INSERT INTO TB_CAR VALUES (#{car_id},#{car_name},'0','0','미적재')
 	</insert>
 	<update id="update" parameterType="car">
-		UPDATE PRODUCT SET PNAME=#{pname},INVENTORY=#{inventory},UNIT_PRICE=#{unit_price},P_IMGNAME=#{p_imgname} WHERE PID=#{pid}
+		UPDATE TB_CAR SET CAR_NAME=#{car_name},CUR_LOCATION_X=#{cur_location_x},CUR_LOCATION_Y=#{cur_location_y},CUR_LOAD=#{cur_load} WHERE CAR_ID=#{car_id}
 	</update>
-	<delete id="delete" parameterType="INTEGER">
-		DELETE FROM PRODUCT WHERE PID=#{obj}
+	<delete id="delete" parameterType="String">
+		DELETE FROM TB_CAR WHERE CAR_ID=#{obj}
 	</delete>
 	
 </mapper>

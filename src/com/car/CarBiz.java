@@ -18,32 +18,30 @@ public class CarBiz implements Biz<String, Car> {
 	
 	@Override
 	public void register(Car v) throws Exception {
-		// TODO Auto-generated method stub
+		dao.insert(v);
 		
 	}
 
 	@Override
 	public void remove(String k) throws Exception {
-		// TODO Auto-generated method stub
+		dao.delete(k);
 		
 	}
 
 	@Override
 	public void modify(Car v) throws Exception {
-		// TODO Auto-generated method stub
+		dao.update(v);
 		
 	}
 
 	@Override
 	public Car get(String k) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return (Car)dao.select(k);
 	}
 
 	@Override
 	public ArrayList<Car> get() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.select();
 	}
 
 }

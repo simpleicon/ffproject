@@ -112,40 +112,22 @@
 
           <div class="card mt-4">
             <div class="card-body">
-              <h3 class="card-title">Product Name</h3>
-              <h4>$24.99</h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!</p>
-              <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-              4.0 stars
+              <h3 class="card-title">MAP</h3>
+              <h4></h4>
+              <p class="card-text">이곳에 지도가 위치합니다.</p>
             </div>
           </div>
           <!-- /.card -->
 		  <div class="card card-outline-secondary my-4">
-				<div class="card-header">Car List</div>
+				<div class="card-header">차량 상세 정보</div>
 				<div class="card-body">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis
-						et enim aperiam inventore, similique necessitatibus neque non!
-						Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi
-						mollitia, necessitatibus quae sint natus.</p>
-					<small class="text-muted">Posted by Anonymous on 3/1/17</small>
-					<hr>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis
-						et enim aperiam inventore, similique necessitatibus neque non!
-						Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi
-						mollitia, necessitatibus quae sint natus.</p>
-					<small class="text-muted">Posted by Anonymous on 3/1/17</small>
-					<hr>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis
-						et enim aperiam inventore, similique necessitatibus neque non!
-						Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi
-						mollitia, necessitatibus quae sint natus.</p>
-					<small class="text-muted">Posted by Anonymous on 3/1/17</small>
-					<hr>
-					<a href="#" class="btn btn-success">Leave a Review</a>
+					<p>차량의 상세정보입니다.</p>
+					<small class="text-muted"></small>
+					
+					<a href="#" class="btn btn-success">button</a>
 				</div>
 			</div>
 			<!-- /.card -->	
-          
 
         </div>
         <!-- /.col-lg-9 -->

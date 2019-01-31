@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.WorkHistoryMapper">
+	
+	<select id="select" parameterType="String" resultType="workhistory">
+		SELECT * FROM TB_WORK_HISTORY WHERE HISTORY_NUM=#{obj}
+	</select>
+	<select id="selectall" resultType="workhistory">
+		SELECT * FROM TB_WORK_HISTORY 
+	</select>
+	<insert id="insert" parameterType="workhistory">
+		INSERT INTO TB_WORK_HISTORY VALUES (SEQ_HISTORY.NEXTVAL, #{car_id},#{a_id},#{p_location_x},#{p_location_y}, #{p_load}, SYSDATE)
+	</insert>
+	<update id="update" parameterType="workhistory">
+		UPDATE TB_WORK_HISTORY SET P_LOCATION_X=#{p_location_x},P_LOCATION_Y=#{p_location_y},P_LOAD=#{p_load} WHERE HISTORY_NUM=#{history_num}
+	</update>
+	<delete id="delete" parameterType="String">
+		DELETE FROM TB_WORK_HISTORY WHERE HISTORY_NUM=#{obj}
+	</delete>
+	
+</mapper>
+
+
+
+
+
+

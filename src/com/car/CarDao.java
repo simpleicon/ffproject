@@ -16,32 +16,29 @@ public class CarDao implements Dao<String, Car> {
 	
 	@Override
 	public void insert(Car v) {
-		// TODO Auto-generated method stub
-		
+		cm.insert(v);
 	}
 
 	@Override
 	public void delete(String k) {
-		// TODO Auto-generated method stub
+		cm.delete(k);
 		
 	}
 
 	@Override
 	public void update(Car v) {
-		// TODO Auto-generated method stub
+		cm.update(v);
 		
 	}
 
 	@Override
 	public Car select(String k) {
-		// TODO Auto-generated method stub
-		return null;
+		return cm.select(k);
 	}
 
 	@Override
 	public ArrayList<Car> select() {
-		// TODO Auto-generated method stub
-		return null;
+		return cm.selectall();
 	}
 
 }
