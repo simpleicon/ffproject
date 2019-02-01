@@ -8,6 +8,7 @@ PUBLIC "-//mybatis.org/DTD Config 3.0//EN"
 		<typeAlias type="com.vo.WorkPlan" alias="workplan"/>
 		<typeAlias type="com.vo.WorkHistory" alias="workhistory"/>
 		<typeAlias type="com.vo.Admin" alias="admin"/>
+		<typeAlias type="com.vo.CarStatus" alias="carstatus"/>
 		
 	</typeAliases>
 	
@@ -16,6 +17,7 @@ PUBLIC "-//mybatis.org/DTD Config 3.0//EN"
 		<mapper resource="com/config/workplanmapper.xml"/>
 		<mapper resource="com/config/workhistorymapper.xml"/>
 		<mapper resource="com/config/adminmapper.xml"/>
+		<mapper resource="com/config/carstatusmapper.xml"/>
 		
 	</mappers>
 </configuration>

@@ -6,8 +6,9 @@
 	<div class="card-body">
 	<c:forEach var="event" items="${list}">
 		<div class="row">
-			${event.car_id }<br>
-			${event.work_status }<br>
+			${event.start_time } <br>
+			${event.car_id }&nbsp; ${event.work_status }
+			<br>
 			<hr>
 		</div>
 	</c:forEach>

@@ -49,6 +49,11 @@
 		    	})
 		    };
 		    
+		    var aBtn = 
+		    
+		    function getStatus(car_id){
+		    	
+		    }
 		    getListGroup('carList');
 		    
 		});
@@ -115,23 +120,15 @@
 
         <div class="col-lg-9">
 
-          <div class="card mt-4">
+         <div class="card mt-4">
             <div class="card-body">
               <h3 class="card-title">MAP</h3>
               <h4></h4>
               <p class="card-text">이곳에 지도가 위치합니다.</p>
             </div>
-          </div>
+         </div>
           <!-- /.card -->
-		  <div class="card card-outline-secondary my-4">
-				<div class="card-header">차량 상세 정보</div>
-				<div class="card-body">
-					<p>차량의 상세정보입니다.</p>
-					<small class="text-muted"></small>
-					
-					<a href="#" class="btn btn-success">button</a>
-				</div>
-			</div>
+		 <div id="carstatus"></div>
 			<!-- /.card -->	
 
         </div>

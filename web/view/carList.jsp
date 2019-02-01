@@ -6,12 +6,12 @@
 	<div class="card-body">
 	<c:forEach var="car" items="${list}">
 		<div class="row">
-			${car.car_id }<br>
-			${car.car_name }<br>
+			<a href="carstatus.can?car_id=${car.car_id }">${car.car_name }</a> <br>
+			<hr>
 		</div>
 	</c:forEach>		
 		
-		<a href="#" class="btn btn-success">Leave a Review</a>
+		<!-- <a href="#" class="btn btn-success">Leave a Review</a> -->
 	</div>
 </div>
 <!-- /.card -->

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.CarStatusMapper">
+	
+	<select id="select" parameterType="String" resultType="carstatus">
+		SELECT * FROM TB_CAR_STATUS WHERE CAR_ID=#{obj}
+	</select>
+	<select id="selectall" resultType="carstatus">
+		SELECT * FROM TB_CAR_STATUS 
+	</select>
+	<insert id="insert" parameterType="carstatus">
+		INSERT INTO TB_CAR_STATUS VALUES (#{car_id},#{car_name},'0','0','미적재')
+	</insert>
+	<update id="update" parameterType="carstatus">
+		UPDATE TB_CAR_STATUS SET CAR_NAME=#{car_name},CUR_LOCATION_X=#{cur_location_x},CUR_LOCATION_Y=#{cur_location_y},CUR_LOAD=#{cur_load} WHERE CAR_ID=#{car_id}
+	</update>
+	<delete id="delete" parameterType="String">
+		DELETE FROM TB_CAR_STATUS WHERE CAR_ID=#{obj}
+	</delete>
+	
+</mapper>
+
+
+
+
+
+
