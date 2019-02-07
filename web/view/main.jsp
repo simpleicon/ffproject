@@ -49,11 +49,15 @@
 		    	})
 		    };
 		    
-		    var aBtn = 
+		  /*   var cBtn = $('.car_id');
+		    cBtn.click(function(){
+		    	console.log("asdf");
+		    	getStatus($(this).attr('id'));
+		    }) */
 		    
-		    function getStatus(car_id){
-		    	
-		    }
+		 
+		    
+		   
 		    getListGroup('carList');
 		    
 		});
@@ -121,7 +125,7 @@
         <div class="col-lg-9">
 
          <div class="card mt-4">
-            <div class="card-body">
+            <div class="card-body card-map">
               <h3 class="card-title">MAP</h3>
               <h4></h4>
               <p class="card-text">이곳에 지도가 위치합니다.</p>
@@ -152,7 +156,24 @@
     <script src="<c:url value="/resources/vendor/jquery/jquery.min.js"/>"></script>
     <!-- <script src="/fleet/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
     <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"/>"></script>
-
+	
+	<script>
+		
+	   function getStatus(car_id){
+	    	var url = "carStatus.can?car_id="+car_id;
+	    	$.ajax({
+	    		url : url,
+	    		success : function(data){
+	    			$('#carstatus').html(data); 
+	    		},
+	    		error : function(){
+	    			alert('error');
+	    		}
+	    	})
+	    }
+	   
+	</script>
+	
   </body>
 
 </html>

@@ -2,7 +2,7 @@
 	pageEncoding="EUC-KR"%>
 <div class="card card-outline-secondary my-4 ">
 	<div class="card-header">Car History</div>
-	<div class="card-body">
+	<div class="card-body car-list">
 		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis
 			et enim aperiam inventore, similique necessitatibus neque non!
 			Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi

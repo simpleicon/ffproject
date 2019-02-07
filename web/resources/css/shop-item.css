@@ -26,13 +26,32 @@ input[type="submit"], input[type="button"]{
 input[type=text]:focus, input[type=password]:focus {
   border: 2px solid #555;
 }
+table{
+	width: 100%;
+	margin: -15px;
+}
+
+tr, th{
+	border: 1px solid black;
+}
 
 .loginpage{
 	padding-bottom: 400px;
 	
 }
 .card-body{
-	min-height: 500px;
 	max-height: 600px;
 	overflow: auto;
 }
+.card-map{
+	min-height: 500px;
+}
+.car-list{
+	min-height: 600px;
+}
+
+.datetime{
+	font-size: 12px;
+}
+
+
