@@ -10,7 +10,6 @@ public class Car {
 	public Car() {
 		super();
 	}
-
 	
 	public Car(int car_id, String car_name) {
 		super();

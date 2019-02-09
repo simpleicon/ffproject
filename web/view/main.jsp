@@ -7,6 +7,9 @@
 
   <head>
 	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<!-- GoogleMap script -->
+	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -16,10 +19,9 @@
 
     <!-- Bootstrap core CSS -->
     <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-
     <!-- Custom styles for this template -->
     <link href="${pageContext.request.contextPath}/resources/css/shop-item.css" rel="stylesheet" type="text/css">
-	
+    
 	
 	<script>
 		$( document ).ready(function() {
@@ -49,18 +51,79 @@
 		    	})
 		    };
 		    
-		  /*   var cBtn = $('.car_id');
-		    cBtn.click(function(){
-		    	console.log("asdf");
-		    	getStatus($(this).attr('id'));
-		    }) */
-		    
-		 
-		    
-		   
+		    //map display
+		    function map(){
+	            var lat = 37.546890;
+	            var lng = 127.133881;
+	            var center = new google.maps.LatLng(lat,lng);
+	            var map = new google.maps.Map(
+	                document.querySelector('.card-map'),
+	                {
+	                    mapType: google.maps.MapTypeId.ROADMAP,
+	                    zoom:20,
+	                    center:center
+	                });
+	            carMarker(map);
+	        };
+	        
+	        //map markers from db
+	        function carMarker(map){
+		    	var url = "carMarker.can";
+		    	$.ajax({
+		    		url : url,
+		    		success : function(data){
+		    			var markers = data;
+		    			
+		    			$(markers).each(function(i,item){
+			                var mcenter = new google.maps.LatLng(
+			                    item.cur_location_x,item.cur_location_y
+			                );
+			                var marker = new google.maps.Marker({
+			                    position:mcenter,
+			                    map:map,
+			                    animation:google.maps.Animation.DROP,
+			                    label:String(item.car_id)
+			                });
+			                /* marker.setMap(map); */
+			                var infowindow = new google.maps.InfoWindow({
+			                    content:item.car_name //html문서처럼 만든 것을 변수로 넣자
+			                    //이벤트 마커 추가하고 해당 이벤트를 클릭했을때 지도에 마커찍기
+			                    //resultmap 사용의 필요성이 있을것
+			                });
+			                marker.addListener('click',function(){
+			                    infowindow.open(map,marker);
+			                    getStatus(item.car_id);
+			                });
+			            });
+		    			
+		    		},
+		    		error : function(){
+		    			alert('error');
+		    		}
+		    	})
+		    };	
+	        
 		    getListGroup('carList');
+		    map();
 		    
-		});
+		}); // end of ready function
+		
+		
+	
+	   function getStatus(car_id){
+	    	var url = "carStatus.can?car_id="+car_id;
+	    	$.ajax({
+	    		url : url,
+	    		success : function(data){
+	    			$('#carstatus').html(data); 
+	    			/* carMarker(); */
+	    		},
+	    		error : function(){
+	    			alert('error');
+	    		}
+	    	})
+	    }
+		
 		
 	</script>
 	
@@ -126,13 +189,19 @@
 
          <div class="card mt-4">
             <div class="card-body card-map">
-              <h3 class="card-title">MAP</h3>
+              <!-- <h3 class="card-title">MAP</h3>
               <h4></h4>
-              <p class="card-text">이곳에 지도가 위치합니다.</p>
+              <p class="card-text">이곳에 지도가 위치합니다.</p> -->
             </div>
          </div>
           <!-- /.card -->
-		 <div id="carstatus"></div>
+		 
+		 	<div class="card card-outline-secondary my-4">
+				<div class="card-header">차량 상세 정보</div>
+				<div class="card-body card-status" id="carstatus">
+					
+				</div>
+			</div>
 			<!-- /.card -->	
 
         </div>
@@ -159,18 +228,6 @@
 	
 	<script>
 		
-	   function getStatus(car_id){
-	    	var url = "carStatus.can?car_id="+car_id;
-	    	$.ajax({
-	    		url : url,
-	    		success : function(data){
-	    			$('#carstatus').html(data); 
-	    		},
-	    		error : function(){
-	    			alert('error');
-	    		}
-	    	})
-	    }
 	   
 	</script>
 	

@@ -31,7 +31,7 @@ table{
 	margin: -15px;
 }
 
-tr, th{
+tr, th, td{
 	border: 1px solid black;
 }
 
@@ -48,6 +48,9 @@ tr, th{
 }
 .car-list{
 	min-height: 600px;
+}
+.card-status{
+	min-height: 150px;
 }
 
 .datetime{

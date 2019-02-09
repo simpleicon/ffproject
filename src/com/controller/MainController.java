@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.frame.Biz;
@@ -68,6 +69,19 @@ public class MainController {
 		} 
 		return mav;
 	}
+	
+	@ResponseBody
+	@RequestMapping("/carMarker")
+	public ArrayList<Car> carMarker(){
+		ArrayList<Car> list = null;
+		try {
+			list = cbiz.get();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 	
 	
 }
