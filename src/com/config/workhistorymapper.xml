@@ -4,8 +4,9 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mapper.WorkHistoryMapper">
 	
-	<select id="select" parameterType="String" resultType="workhistory">
-		SELECT * FROM TB_WORK_HISTORY WHERE HISTORY_NUM=#{obj}
+	<select id="select" parameterType="map" resultType="workhistory">
+		<!-- SELECT * FROM TB_WORK_HISTORY WHERE HISTORY_NUM=#{obj} -->
+		SELECT * FROM TB_WORK_HISTORY <![CDATA[ WHERE CAR_ID= #{car_id} AND END_TIME >= TO_DATE(#{start_date},'yyyy-mm-dd') AND END_TIME <= TO_DATE(#{end_date}, 'yyyy-mm-dd')]]>
 	</select>
 	<select id="selectall" resultType="workhistory">
 		SELECT * FROM TB_WORK_HISTORY 

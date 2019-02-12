@@ -122,7 +122,24 @@
 	    			alert('error');
 	    		}
 	    	})
-	    }
+	    };
+		
+		function searchHistory(){
+			var car_id = $('#search-form [name="car_id"]').val();
+			var start_date = $('#search-form [name="start_date"]').val();
+			var end_date = $('#search-form [name="end_date"]').val();
+			
+			var url = "searchHistory.can?car_id="+car_id+"&start_date="+start_date+"&end_date="+end_date;
+			$.ajax({
+				url: url,
+				success: function(data){
+					$('#history').html(data);
+				},
+				error: function(){
+					alert('error');
+				}
+			})
+		};
 		
 		
 	</script>

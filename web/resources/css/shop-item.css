@@ -55,6 +55,8 @@ tr, th, td{
 
 .datetime{
 	font-size: 12px;
+	padding-left : 5px;
+	padding-right : 5px;
 }
 
 

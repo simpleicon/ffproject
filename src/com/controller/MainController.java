@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.frame.Biz;
+import com.frame.Biz2;
 import com.vo.Car;
 import com.vo.WorkHistory;
 
@@ -19,7 +20,7 @@ public class MainController {
 	@Resource(name="cbiz")
 	Biz<String, Car> cbiz;
 	@Resource(name="whbiz")
-	Biz<String, WorkHistory> whbiz;
+	Biz2<String, WorkHistory, String, String> whbiz;
 	
 	@RequestMapping("/registerpage")
 	public ModelAndView register() {
@@ -70,6 +71,8 @@ public class MainController {
 		return mav;
 	}
 	
+	
+	//map marker
 	@ResponseBody
 	@RequestMapping("/carMarker")
 	public ArrayList<Car> carMarker(){
@@ -80,6 +83,23 @@ public class MainController {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	@RequestMapping("/searchHistory")
+	public ModelAndView history(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+		ArrayList<WorkHistory> list = null;
+		String car_id = req.getParameter("car_id");
+		String start_date = req.getParameter("start_date");
+		String end_date = req.getParameter("end_date");
+		mav.setViewName("searchedHistory");
+		try {
+			list = whbiz.get(car_id, start_date, end_date);
+			mav.addObject("historyList", list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return mav;
 	}
 	
 	

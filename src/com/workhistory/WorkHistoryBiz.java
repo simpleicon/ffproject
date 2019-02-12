@@ -6,15 +6,15 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.frame.Biz;
-import com.frame.Dao;
+import com.frame.Biz2;
+import com.frame.Dao2;
 import com.vo.WorkHistory;
 
 @Service("whbiz")
-public class WorkHistoryBiz implements Biz<String, WorkHistory> {
+public class WorkHistoryBiz implements Biz2<String, WorkHistory, String, String > {
 	
 	@Resource(name="whdao")
-	Dao dao;
+	Dao2 dao;
 	
 	@Override
 	public void register(WorkHistory v) throws Exception {
@@ -33,8 +33,8 @@ public class WorkHistoryBiz implements Biz<String, WorkHistory> {
 	}
 
 	@Override
-	public WorkHistory get(String k) throws Exception {
-		return (WorkHistory)dao.select(k);
+	public ArrayList<WorkHistory> get(String k, String a, String b) throws Exception {
+		return dao.select(k,a,b);
 	}
 
 	@Override
