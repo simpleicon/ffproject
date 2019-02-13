@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>	
 <c:choose>
-<c:when test="${fn:length(historyList) }>0">
+<c:when test="${fn:length(historyList) >0}">
 	<table class="table">
 		<thead>
 			<tr><th>Start Time</th><th>End Time</th><th>Status</th></tr>

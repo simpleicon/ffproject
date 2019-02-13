@@ -24,6 +24,128 @@
     
 	
 	<script>
+        //map markers from db
+        function carMarker(map){
+	    	var url = "carMarker.can";
+	    	$.ajax({
+	    		url : url,
+	    		success : function(data){
+	    			var markers = data;
+	    			
+	    			$(markers).each(function(i,item){
+		                var mcenter = new google.maps.LatLng(
+		                    item.cur_location_x,item.cur_location_y
+		                );
+		                var marker = new google.maps.Marker({
+		                    position:mcenter,
+		                    map:map,
+		                    animation:google.maps.Animation.DROP,
+		                    label:String(item.car_id)
+		                });
+		                /* marker.setMap(map); */
+		                var infowindow = new google.maps.InfoWindow({
+		                    content:item.car_name //html문서처럼 만든 것을 변수로 넣자
+		                    //이벤트 마커 추가하고 해당 이벤트를 클릭했을때 지도에 마커찍기
+		                    //resultmap 사용의 필요성이 있을것
+		                });
+		                marker.addListener('click',function(){
+		                    infowindow.open(map,marker);
+		                    getStatus(item.car_id);
+		                });
+		            });
+	    			
+	    		},
+	    		error : function(){
+	    			alert('error');
+	    		}
+	    	})
+	    };	
+		
+	    //car status
+	    function getStatus(car_id){
+		    	var url = "carStatus.can?car_id="+car_id;
+		    	$.ajax({
+		    		url : url,
+		    		success : function(data){
+		    			$('#carstatus').html(data); 
+		    			/* carMarker(); */
+		    		},
+		    		error : function(){
+		    			alert('error');
+		    		}
+		    	})
+		    };
+		//search history			
+	    function searchHistory(){
+			var car_id = $('#search-form [name="car_id"]').val();
+			var start_date = $('#search-form [name="start_date"]').val();
+			var end_date = $('#search-form [name="end_date"]').val();
+			
+			var url = "searchHistory.can?car_id="+car_id+"&start_date="+start_date+"&end_date="+end_date;
+			$.ajax({
+				url: url,
+				success: function(data){
+					$('#history').html(data);
+				},
+				error: function(){
+					alert('error');
+				}
+			})
+		};
+		
+		//event marker 	
+		function eventMarker(plan_num){
+			var url = "getPlan.can?plan_num="+plan_num;
+			$.ajax({
+				url : url,
+				success : function(data){
+					var eventMarkers = data;
+					
+					$(eventMarkers).each(function(i,item){
+		                var mcenter = new google.maps.LatLng(
+		                    item.p_location_x,item.p_location_y
+		                );
+		                var marker = new google.maps.Marker({
+		                    position:mcenter,
+		                    map:map,
+		                    animation:google.maps.Animation.DROP,
+		                    /* label:String(item.car_id), */
+		                    icon:'resources/icon_img/event-icon.png'
+		                });
+		                /* marker.setMap(map); */
+		                var infowindow = new google.maps.InfoWindow({
+		                    content:item.a_id 
+		                    //html문서처럼 만든 것을 변수로 넣자
+		                   
+		                });
+		                marker.addListener('click',function(){
+		                    infowindow.open(map,marker);
+		                    getStatus(item.car_id);
+		                });
+		            });
+					
+				},
+				error : function(){
+					alert('error');
+				}
+			})
+		};
+			
+	    
+	    function map(){
+	        var lat = 37.546890;
+	        var lng = 127.133881;
+	        var center = new google.maps.LatLng(lat,lng);
+	        map = new google.maps.Map(
+	            document.querySelector('.card-map'),
+	            {
+	                mapType: google.maps.MapTypeId.ROADMAP,
+	                zoom:20,
+	                center:center
+	            });
+	        carMarker(map);
+	    };
+	    //ready function
 		$( document ).ready(function() {
 		    console.log( "ready!" );
 		    
@@ -51,57 +173,6 @@
 		    	})
 		    };
 		    
-		    //map display
-		    function map(){
-	            var lat = 37.546890;
-	            var lng = 127.133881;
-	            var center = new google.maps.LatLng(lat,lng);
-	            var map = new google.maps.Map(
-	                document.querySelector('.card-map'),
-	                {
-	                    mapType: google.maps.MapTypeId.ROADMAP,
-	                    zoom:20,
-	                    center:center
-	                });
-	            carMarker(map);
-	        };
-	        
-	        //map markers from db
-	        function carMarker(map){
-		    	var url = "carMarker.can";
-		    	$.ajax({
-		    		url : url,
-		    		success : function(data){
-		    			var markers = data;
-		    			
-		    			$(markers).each(function(i,item){
-			                var mcenter = new google.maps.LatLng(
-			                    item.cur_location_x,item.cur_location_y
-			                );
-			                var marker = new google.maps.Marker({
-			                    position:mcenter,
-			                    map:map,
-			                    animation:google.maps.Animation.DROP,
-			                    label:String(item.car_id)
-			                });
-			                /* marker.setMap(map); */
-			                var infowindow = new google.maps.InfoWindow({
-			                    content:item.car_name //html문서처럼 만든 것을 변수로 넣자
-			                    //이벤트 마커 추가하고 해당 이벤트를 클릭했을때 지도에 마커찍기
-			                    //resultmap 사용의 필요성이 있을것
-			                });
-			                marker.addListener('click',function(){
-			                    infowindow.open(map,marker);
-			                    getStatus(item.car_id);
-			                });
-			            });
-		    			
-		    		},
-		    		error : function(){
-		    			alert('error');
-		    		}
-		    	})
-		    };	
 	        
 		    getListGroup('carList');
 		    map();
@@ -110,38 +181,8 @@
 		
 		
 	
-	   function getStatus(car_id){
-	    	var url = "carStatus.can?car_id="+car_id;
-	    	$.ajax({
-	    		url : url,
-	    		success : function(data){
-	    			$('#carstatus').html(data); 
-	    			/* carMarker(); */
-	    		},
-	    		error : function(){
-	    			alert('error');
-	    		}
-	    	})
-	    };
 		
-		function searchHistory(){
-			var car_id = $('#search-form [name="car_id"]').val();
-			var start_date = $('#search-form [name="start_date"]').val();
-			var end_date = $('#search-form [name="end_date"]').val();
-			
-			var url = "searchHistory.can?car_id="+car_id+"&start_date="+start_date+"&end_date="+end_date;
-			$.ajax({
-				url: url,
-				success: function(data){
-					$('#history').html(data);
-				},
-				error: function(){
-					alert('error');
-				}
-			})
-		};
-		
-		
+		   
 	</script>
 	
   </head>
@@ -244,8 +285,8 @@
     <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"/>"></script>
 	
 	<script>
-		
-	   
+	//map display
+
 	</script>
 	
   </body>
