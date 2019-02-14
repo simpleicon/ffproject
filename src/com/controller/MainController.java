@@ -1,5 +1,6 @@
 package com.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.annotation.Resource;
@@ -12,11 +13,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.frame.Biz;
 import com.frame.Biz2;
+import com.controller.Server;
 import com.vo.Car;
 import com.vo.WorkHistory;
 
 @Controller
 public class MainController {
+	
 	@Resource(name="cbiz")
 	Biz<String, Car> cbiz;
 	@Resource(name="whbiz")
@@ -36,12 +39,7 @@ public class MainController {
 		return mav;
 	}
 	
-	@RequestMapping("/main")
-	public ModelAndView main() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("main");
-		return mav;
-	}
+	
 	
 	@RequestMapping("/listgroup")
 	public ModelAndView listgroup(HttpServletRequest req) {

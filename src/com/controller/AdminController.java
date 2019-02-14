@@ -11,10 +11,12 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.frame.Biz;
+import com.controller.Server;
 import com.vo.Admin;
 
 @Controller
 public class AdminController {
+	Server server;
 	@Resource(name="abiz")
 	Biz biz;
 	
