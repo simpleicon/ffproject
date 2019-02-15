@@ -24,8 +24,25 @@
     
 	
 	<script>
+		var googleMap;
+		var googleMarkers = [];
+		//map 그리기
+		function map(){
+	        var lat = 37.546890;
+	        var lng = 127.133881;
+	        var center = new google.maps.LatLng(lat,lng);
+	        googleMap = new google.maps.Map(
+	            document.querySelector('.card-map'),
+	            {
+	                mapType: google.maps.MapTypeId.ROADMAP,
+	                zoom:20,
+	                center:center
+	            });
+	        carMarker(googleMap);
+	    };
+	
         //map markers from db
-        function carMarker(map){
+        function carMarker(googleMap){
 	    	var url = "carMarker.can";
 	    	$.ajax({
 	    		url : url,
@@ -38,10 +55,11 @@
 		                );
 		                var marker = new google.maps.Marker({
 		                    position:mcenter,
-		                    map:map,
+		                    map:googleMap,
 		                    animation:google.maps.Animation.DROP,
 		                    label:String(item.car_id)
 		                });
+		                googleMarkers.push(marker);
 		                /* marker.setMap(map); */
 		                var infowindow = new google.maps.InfoWindow({
 		                    content:item.car_name //html문서처럼 만든 것을 변수로 넣자
@@ -49,7 +67,7 @@
 		                    //resultmap 사용의 필요성이 있을것
 		                });
 		                marker.addListener('click',function(){
-		                    infowindow.open(map,marker);
+		                    infowindow.open(googleMap,marker);
 		                    getStatus(item.car_id);
 		                });
 		            });
@@ -107,7 +125,7 @@
 		                );
 		                var marker = new google.maps.Marker({
 		                    position:mcenter,
-		                    map:map,
+		                    map:googleMap,
 		                    animation:google.maps.Animation.DROP,
 		                    /* label:String(item.car_id), */
 		                    icon:'resources/icon_img/event-icon.png'
@@ -119,7 +137,7 @@
 		                   
 		                });
 		                marker.addListener('click',function(){
-		                    infowindow.open(map,marker);
+		                    infowindow.open(googleMap,marker);
 		                    getStatus(item.car_id);
 		                });
 		            });
@@ -130,21 +148,20 @@
 				}
 			})
 		};
-			
+		//googlemap에 마커 표시, null 인자는 marker hide
+		function setMapOnAll(googlemap) {
+			  for (var i = 0; i < googleMarkers.length; i++) {
+			    googleMarkers[i].setMap(googlemap);
+			  }
+		};
+		
+		function moving(){
+			setMapOnAll(null);
+			googleMarkers = [];
+			carMarker(googleMap);
+		};	
 	    
-	    function map(){
-	        var lat = 37.546890;
-	        var lng = 127.133881;
-	        var center = new google.maps.LatLng(lat,lng);
-	        map = new google.maps.Map(
-	            document.querySelector('.card-map'),
-	            {
-	                mapType: google.maps.MapTypeId.ROADMAP,
-	                zoom:20,
-	                center:center
-	            });
-	        carMarker(map);
-	    };
+	    
 	    //ready function
 		$( document ).ready(function() {
 		    console.log( "ready!" );

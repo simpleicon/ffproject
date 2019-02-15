@@ -31,18 +31,21 @@ public class PadController {
 	
 	@ResponseBody
 	@RequestMapping("/control")
-	public ModelAndView controlSignal(HttpServletRequest req) {
-		ModelAndView mav = new ModelAndView();
+	public void controlSignal(HttpServletRequest req) {
 		String id =req.getParameter("id");
 		String value =req.getParameter("value");
 		
 		System.out.println(id+"  "+ value);
-		
 		//CANmsg to Pad
 		server.sendMsg(value);
-		
-		mav.setViewName("main");
-		return mav;
 	}
+	@RequestMapping("/candata")
+	public void candata(HttpServletRequest req) {
+		String id =req.getParameter("id");
+		String value =req.getParameter("value");
+		System.out.println(id+"  "+ value);
+	}
+	
+	//컨트롤패드에서 받은 데이터 분류해서 workplan에 미리 넣어둘것 있고 아닌 애들은 쓰루해서 넘기고 
 	
 }
