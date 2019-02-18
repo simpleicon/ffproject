@@ -15,11 +15,9 @@ public class WorkPlan {
 		super();
 	}
 	
-	
-	
-	public WorkPlan(int plan_num, int car_id, String a_id, String p_location_x, String p_location_y) {
+
+	public WorkPlan(int car_id, String a_id, String p_location_x, String p_location_y) {
 		super();
-		this.plan_num = plan_num;
 		this.car_id = car_id;
 		this.a_id = a_id;
 		this.p_location_x = p_location_x;
@@ -27,13 +25,22 @@ public class WorkPlan {
 		
 	}
 
-	public WorkPlan(int plan_num, int car_id, String a_id, String p_load) {
+	public WorkPlan(int car_id, String a_id, String p_load) {
 		super();
-		this.plan_num = plan_num;
 		this.car_id = car_id;
 		this.a_id = a_id;
 		this.p_load = p_load;
 		
+	}
+	
+
+	public WorkPlan(int car_id, String a_id, String p_location_x, String p_location_y, String p_load) {
+		super();
+		this.car_id = car_id;
+		this.a_id = a_id;
+		this.p_location_x = p_location_x;
+		this.p_location_y = p_location_y;
+		this.p_load = p_load;
 	}
 
 

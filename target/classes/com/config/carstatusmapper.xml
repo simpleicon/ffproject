@@ -11,10 +11,10 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM TB_CAR_STATUS 
 	</select>
 	<insert id="insert" parameterType="carstatus">
-		INSERT INTO TB_CAR_STATUS VALUES (#{car_id},#{car_name},'0','0','미적재')
+		INSERT INTO TB_CAR_STATUS VALUES (#{car_id},#{ignition},#{battery},#{charge},#{speed})
 	</insert>
 	<update id="update" parameterType="carstatus">
-		UPDATE TB_CAR_STATUS SET CAR_NAME=#{car_name},CUR_LOCATION_X=#{cur_location_x},CUR_LOCATION_Y=#{cur_location_y},CUR_LOAD=#{cur_load} WHERE CAR_ID=#{car_id}
+		UPDATE TB_CAR_STATUS SET IGNITION=#{ignition},BATTERY=#{battery},CHARGE=#{charge},SPEED=#{speed} WHERE CAR_ID=#{car_id}
 	</update>
 	<delete id="delete" parameterType="String">
 		DELETE FROM TB_CAR_STATUS WHERE CAR_ID=#{obj}
