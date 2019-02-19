@@ -47,7 +47,7 @@ public class MainController {
 		
 		String item = req.getParameter("item");
 		mav.setViewName(item);
-		if(item.equals("carList")) {
+		if(item.equals("carList")|| item.equals("carHistory")) {
 			ArrayList<Car> list = null;
 			try {
 				list = cbiz.get();
@@ -56,7 +56,7 @@ public class MainController {
 				System.out.println("리스트 출력 오류");
 				e.printStackTrace();
 			}
-		} else if(item.equals("carEvents") || item.equals("carHistory")) {
+		} else if(item.equals("carEvents") ) {
 			ArrayList<WorkHistory> list = null;
 			try {
 				list = whbiz.get();

@@ -12,10 +12,10 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM TB_WORK_HISTORY 
 	</select>
 	<insert id="insert" parameterType="workhistory">
-		INSERT INTO TB_WORK_HISTORY (HISTORY_NUM, CAR_ID, PLAN_NUM, WORK_STATUS, START_TIME) VALUES (SEQ_HISTORY.NEXTVAL,#{car_id},SEQ_PLAN.CURRVAL,#{work_status},SYSDATE);
+		INSERT INTO TB_WORK_HISTORY VALUES (SEQ_HISTORY.NEXTVAL,#{car_id},SEQ_PLAN.NEXTVAL-1,#{work_status},SYSDATE,NULL)
 	</insert>
 	<update id="update" parameterType="workhistory">
-		UPDATE TB_WORK_HISTORY SET WORK_STATUS=#{work_status},END_TIME=#{end_time} WHERE HISTORY_NUM=#{history_num}
+		UPDATE TB_WORK_HISTORY SET WORK_STATUS=#{work_status},END_TIME=SYSDATE WHERE HISTORY_NUM=#{history_num}
 	</update>
 	<delete id="delete" parameterType="String">
 		DELETE FROM TB_WORK_HISTORY WHERE HISTORY_NUM=#{obj}

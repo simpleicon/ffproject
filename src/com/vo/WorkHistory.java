@@ -13,6 +13,15 @@ public class WorkHistory {
 	public WorkHistory() {
 		super();
 	}
+	
+	
+	public WorkHistory(int car_id, String work_status) {
+		super();
+		this.car_id = car_id;
+		this.work_status = work_status;
+	}
+
+
 
 	public WorkHistory(int history_num, int car_id, int plan_num, String work_status, Date start_time) {
 		super();

@@ -39,8 +39,9 @@
 	                center:center
 	            });
 	        carMarker(googleMap);
+	        stationMarker(googleMap);
 	    };
-	
+		
         //map markers from db
         function carMarker(googleMap){
 	    	var url = "carMarker.can";
@@ -63,8 +64,7 @@
 		                /* marker.setMap(map); */
 		                var infowindow = new google.maps.InfoWindow({
 		                    content:item.car_name //html문서처럼 만든 것을 변수로 넣자
-		                    //이벤트 마커 추가하고 해당 이벤트를 클릭했을때 지도에 마커찍기
-		                    //resultmap 사용의 필요성이 있을것
+		                    
 		                });
 		                marker.addListener('click',function(){
 		                    infowindow.open(googleMap,marker);
@@ -77,7 +77,18 @@
 	    			alert('error');
 	    		}
 	    	})
-	    };	
+	    };
+	    function stationMarker(googleMap){
+	    	var mcenter = new google.maps.LatLng(
+	    			37.546837, 127.134114		
+	    	);
+	    	var marker = new google.maps.Marker({
+	    		position : mcenter,
+	    		map:googleMap,
+	    		label:"station",
+	    		icon:'resources/icon_img/charge.png'
+	    	});
+	    };
 		
 	    //car status
 	    function getStatus(car_id){
@@ -110,6 +121,7 @@
 				}
 			})
 		};
+		
 		
 		//event marker 	
 		function eventMarker(plan_num){
@@ -148,6 +160,7 @@
 				}
 			})
 		};
+		
 		//googlemap에 마커 표시, null 인자는 marker hide
 		function setMapOnAll(googlemap) {
 			  for (var i = 0; i < googleMarkers.length; i++) {
@@ -155,6 +168,7 @@
 			  }
 		};
 		
+		//차량 마커 다시 그리기
 		function moving(){
 			setMapOnAll(null);
 			googleMarkers = [];
@@ -190,7 +204,10 @@
 		    	})
 		    };
 		    
-	        
+		    
+	        setInterval(() => {
+				moving();
+			}, 2000);
 		    getListGroup('carList');
 		    map();
 		    

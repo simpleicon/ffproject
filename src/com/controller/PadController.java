@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import com.frame.Biz;
 import com.frame.Biz2;
 import com.vo.Car;
 import com.vo.CarStatus;
+import com.vo.WorkHistory;
 import com.vo.WorkPlan;
 
 @Controller
@@ -154,37 +156,72 @@ public class PadController {
 		}else if(can_id.equals("30")) {
 			Car car = new Car();
 			String load = null;
+			String workStatus = null;
+			
 			try {
 				car = (Car) cbiz.get(carid);
 				if(can_data==10) {
 					load = "적재중";
+					workStatus ="작업중";
 				}else if(can_data==11) {
 					load = "미적재";
+					workStatus = "작업중";
 				}
+				WorkHistory wh = new WorkHistory(Integer.parseInt(carid), workStatus);
+				
 				car.setCur_load(load);
-				cbiz.register(car);
+				cbiz.modify(car);
+				whbiz.register(wh);
+				
+				
+				ArrayList<WorkHistory> list = null;
+				WorkHistory updateWh = new WorkHistory();
+				list = whbiz.get();
+				updateWh = list.get(list.size()-1);
+				Thread.sleep(2000);
+				workStatus = "작업완료";
+				System.out.println("hisnum :"+updateWh.getHistory_num());
+				updateWh.setWork_status(workStatus);
+				whbiz.modify(updateWh);
 			} catch (Exception e) {
+				System.out.println("ddasd");
 				e.printStackTrace();
 			}
 		}else if(can_id.equals("40")) {
 			Car car = new Car();
+			String workStatus = null;
 			try {
 				car = (Car)cbiz.get(carid);
 				double locx = Double.parseDouble(car.getCur_location_x());
 				double locy = Double.parseDouble(car.getCur_location_y());
 				if(can_data==10) {
-					locx += 0.00001;
+					locx += 0.0001;
 				}else if(can_data==11) {
-					locx -= 0.00001;
+					locx -= 0.0001;
 				}else if(can_data==12) {
-					locy += 0.00001;
+					locy += 0.0001;
 				}else if(can_data==13) {
-					locy -= 0.00001;
+					locy -= 0.0001;
 				}
 				car.setCur_location_x(String.valueOf(locx));
 				car.setCur_location_y(String.valueOf(locy));
+				workStatus = "작업중";
 				cbiz.modify(car);
+				WorkHistory wh = new WorkHistory(Integer.parseInt(carid), workStatus);
+				whbiz.register(wh);
+				
+				////
+				ArrayList<WorkHistory> list = null;
+				WorkHistory updateWh = new WorkHistory();
+				list = whbiz.get();
+				updateWh = list.get(list.size()-1);
+				Thread.sleep(2000);
+				workStatus = "작업완료";
+				System.out.println("hisnum :"+updateWh.getHistory_num());
+				updateWh.setWork_status(workStatus);
+				whbiz.modify(updateWh);
 			} catch (Exception e) {
+				System.out.println("qqqqqq");
 				e.printStackTrace();
 			}
 		}
