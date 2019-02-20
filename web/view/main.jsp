@@ -26,6 +26,7 @@
 	<script>
 		var googleMap;
 		var googleMarkers = [];
+		var eventMarkers = [];
 		//map 그리기
 		function map(){
 	        var lat = 37.546890;
@@ -57,7 +58,7 @@
 		                var marker = new google.maps.Marker({
 		                    position:mcenter,
 		                    map:googleMap,
-		                    animation:google.maps.Animation.DROP,
+		                    /* animation:google.maps.Animation.DROP, */
 		                    label:String(item.car_id)
 		                });
 		                googleMarkers.push(marker);
@@ -67,7 +68,7 @@
 		                    
 		                });
 		                marker.addListener('click',function(){
-		                    infowindow.open(googleMap,marker);
+		                    /* infowindow.open(googleMap,marker); */
 		                    getStatus(item.car_id);
 		                });
 		            });
@@ -78,6 +79,7 @@
 	    		}
 	    	})
 	    };
+	    //Charge Station Marker
 	    function stationMarker(googleMap){
 	    	var mcenter = new google.maps.LatLng(
 	    			37.546837, 127.134114		
@@ -103,7 +105,7 @@
 		    			alert('error');
 		    		}
 		    	})
-		    };
+		 };
 		//search history			
 	    function searchHistory(){
 			var car_id = $('#search-form [name="car_id"]').val();
@@ -129,9 +131,9 @@
 			$.ajax({
 				url : url,
 				success : function(data){
-					var eventMarkers = data;
+					var Markers = data;
 					
-					$(eventMarkers).each(function(i,item){
+					$(Markers).each(function(i,item){
 		                var mcenter = new google.maps.LatLng(
 		                    item.p_location_x,item.p_location_y
 		                );
@@ -142,9 +144,16 @@
 		                    /* label:String(item.car_id), */
 		                    icon:'resources/icon_img/event-icon.png'
 		                });
+		                eventMarkers.push(marker);
+		                var arrnum = eventMarkers.length-1;
 		                /* marker.setMap(map); */
+		                if(item.p_load == null){
+		                	item.p_load = '-';
+		                }
 		                var infowindow = new google.maps.InfoWindow({
-		                    content:item.a_id 
+		                    content:'<div>관리자: '+item.a_id+
+		                    '<br>위치정보: '+item.p_location_x+'&nbsp;'+item.p_location_y+
+		                    '<br>'+item.p_load+'<br><button onclick="removeEventMarker('+arrnum+')">지우기</button></div>' 
 		                    //html문서처럼 만든 것을 변수로 넣자
 		                   
 		                });
@@ -160,6 +169,11 @@
 				}
 			})
 		};
+		
+		//event Marker delete
+		function removeEventMarker(arrnum){
+		    eventMarkers[arrnum].setMap(null);
+		}
 		
 		//googlemap에 마커 표시, null 인자는 marker hide
 		function setMapOnAll(googlemap) {

@@ -1,6 +1,5 @@
 package com.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.annotation.Resource;
@@ -13,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.frame.Biz;
 import com.frame.Biz2;
-import com.controller.Server;
 import com.vo.Car;
 import com.vo.WorkHistory;
 

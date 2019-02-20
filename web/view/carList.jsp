@@ -10,7 +10,6 @@
 			<hr>
 		</div>
 	</c:forEach>		
-		<button onclick="moving()">movemove</button>
 		<!-- <a href="#" class="btn btn-success">Leave a Review</a> -->
 	</div>
 </div>

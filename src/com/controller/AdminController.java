@@ -20,7 +20,6 @@ public class AdminController {
 	@Resource(name="abiz")
 	Biz biz;
 	
-	
 	@RequestMapping("/register")
 	public ModelAndView register(Admin admin) {
 		ModelAndView mav = new ModelAndView();
