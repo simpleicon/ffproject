@@ -13,15 +13,21 @@ import org.springframework.web.servlet.ModelAndView;
 import com.frame.Biz;
 import com.frame.Biz2;
 import com.vo.Car;
+import com.vo.CarStatus;
 import com.vo.WorkHistory;
+import com.vo.WorkPlan;
 
 @Controller
 public class MainController {
 	
 	@Resource(name="cbiz")
 	Biz<String, Car> cbiz;
+	@Resource(name="csbiz")
+	Biz csbiz;
 	@Resource(name="whbiz")
 	Biz2<String, WorkHistory, String, String> whbiz;
+	@Resource(name="wpbiz")
+	Biz<String, WorkPlan> biz;
 	
 	@RequestMapping("/registerpage")
 	public ModelAndView register() {
@@ -37,8 +43,7 @@ public class MainController {
 		return mav;
 	}
 	
-	
-	
+	//리스트탭
 	@RequestMapping("/listgroup")
 	public ModelAndView listgroup(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
@@ -80,6 +85,22 @@ public class MainController {
 		}
 		return list;
 	}
+	
+	//작업내역
+	@ResponseBody
+	@RequestMapping("getPlan")
+	public WorkPlan plan(HttpServletRequest req) {
+		WorkPlan plan = null;
+		String plan_num = req.getParameter("plan_num");
+		try {
+			plan = biz.get(plan_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return plan;
+	}
+	
+	//작업내역 검색
 	@RequestMapping("/searchHistory")
 	public ModelAndView history(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
@@ -95,6 +116,26 @@ public class MainController {
 			e.printStackTrace();
 		}
 		
+		return mav;
+	}
+	
+	//차량 상세 정보
+	@RequestMapping("/carStatus.can")
+	public ModelAndView status(HttpServletRequest req) { 
+		ModelAndView mav = new ModelAndView();
+		CarStatus status = new CarStatus();
+		Car car = new Car();
+		String car_id = req.getParameter("car_id");
+		try {
+			car = (Car)cbiz.get(car_id);
+			status = (CarStatus) csbiz.get(car_id);
+			mav.addObject("car", car);
+			mav.addObject("status", status);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		mav.setViewName("carStatus");
 		return mav;
 	}
 	

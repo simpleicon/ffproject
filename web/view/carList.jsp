@@ -9,7 +9,8 @@
 			<div onclick="getStatus(${car.car_id})" class ="car_id" id="${car.car_id }">${car.car_name }</div> <br>
 			<hr>
 		</div>
-	</c:forEach>		
+	</c:forEach>
+	<a onclick="simulation()">simulation</a>		
 		<!-- <a href="#" class="btn btn-success">Leave a Review</a> -->
 	</div>
 </div>

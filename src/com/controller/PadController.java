@@ -69,7 +69,7 @@ public class PadController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		//load 관련 신호
 		if(cmd == 30) {
 			String p_load = null;
 			
@@ -94,6 +94,7 @@ public class PadController {
 					e.printStackTrace();
 				}
 			}
+		//이동 관련 신호
 		}else if(cmd == 40) {
 			double locx = Double.parseDouble(cur_locx);
 			double locy = Double.parseDouble(cur_locy);
@@ -121,6 +122,7 @@ public class PadController {
 				System.out.println("moving wp insert error");
 				e.printStackTrace();
 			}
+		//전원, 배터리 신호
 		}else {
 			System.out.println(car_id+"  "+ value);
 			server.sendMsg(value);
@@ -173,7 +175,6 @@ public class PadController {
 				cbiz.modify(car);
 				whbiz.register(wh);
 				
-				
 				ArrayList<WorkHistory> list = null;
 				WorkHistory updateWh = new WorkHistory();
 				list = whbiz.get();
@@ -184,7 +185,7 @@ public class PadController {
 				updateWh.setWork_status(workStatus);
 				whbiz.modify(updateWh);
 			} catch (Exception e) {
-				System.out.println("ddasd");
+				System.out.println("load update failed");
 				e.printStackTrace();
 			}
 		}else if(can_id.equals("40")) {
@@ -221,7 +222,7 @@ public class PadController {
 				updateWh.setWork_status(workStatus);
 				whbiz.modify(updateWh);
 			} catch (Exception e) {
-				System.out.println("qqqqqq");
+				System.out.println("move update failed");
 				e.printStackTrace();
 			}
 		}

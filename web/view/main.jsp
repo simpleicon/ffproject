@@ -29,19 +29,32 @@
 		var eventMarkers = [];
 		//map ±×¸®±â
 		function map(){
-	        var lat = 37.546890;
-	        var lng = 127.133881;
+	        var lat = 37.368856;
+	        var lng = 127.324209;
 	        var center = new google.maps.LatLng(lat,lng);
 	        googleMap = new google.maps.Map(
 	            document.querySelector('.card-map'),
 	            {
 	                mapType: google.maps.MapTypeId.ROADMAP,
-	                zoom:20,
+	                zoom:18,
 	                center:center
 	            });
 	        carMarker(googleMap);
 	        stationMarker(googleMap);
 	    };
+	    
+	    function simulation(){
+	    	var url = "simulation.can";
+	    	$.ajax({
+	    		url : url,
+	    		success : function(data){
+	    			
+	    		},
+	    		error : function(){
+	    			alert('error simulation');
+	    		}
+	    	})
+	    }
 		
         //map markers from db
         function carMarker(googleMap){
@@ -87,7 +100,7 @@
 	    	var marker = new google.maps.Marker({
 	    		position : mcenter,
 	    		map:googleMap,
-	    		label:"station",
+	    		label:"station",	
 	    		icon:'resources/icon_img/charge.png'
 	    	});
 	    };
