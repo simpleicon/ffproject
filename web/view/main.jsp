@@ -8,7 +8,7 @@
   <head>
 	<script src="http://code.jquery.com/jquery.min.js"></script>
 	<!-- GoogleMap script -->
-	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -43,6 +43,24 @@
 	        stationMarker(googleMap);
 	    };
 	    
+	    //street view panorama
+	    function initPano(locx,locy) {
+	        // Note: constructed panorama objects have visible: true
+	        // set by default.
+	         
+	        var panorama = new google.maps.StreetViewPanorama(
+	            document.getElementById('streetMap'), {
+	              position: {lat: locx, lng: locy},
+	              addressControlOptions: {
+	                position: google.maps.ControlPosition.BOTTOM_CENTER
+	              },
+	              linksControl: false,
+	              panControl: false,
+	              enableCloseButton: false
+	        });
+	    };
+	    
+	    //simulation data 실행
 	    function simulation(){
 	    	var url = "simulation.can";
 	    	$.ajax({
@@ -83,6 +101,7 @@
 		                marker.addListener('click',function(){
 		                    /* infowindow.open(googleMap,marker); */
 		                    getStatus(item.car_id);
+		                    initPano(Number(item.cur_location_x),Number(item.cur_location_y));
 		                });
 		            });
 	    			
@@ -92,10 +111,11 @@
 	    		}
 	    	})
 	    };
+	    
 	    //Charge Station Marker
 	    function stationMarker(googleMap){
 	    	var mcenter = new google.maps.LatLng(
-	    			37.546837, 127.134114		
+	    			37.368305, 127.323782		
 	    	);
 	    	var marker = new google.maps.Marker({
 	    		position : mcenter,
@@ -170,9 +190,11 @@
 		                    //html문서처럼 만든 것을 변수로 넣자
 		                   
 		                });
+		                
 		                marker.addListener('click',function(){
 		                    infowindow.open(googleMap,marker);
 		                    getStatus(item.car_id);
+		                    initPano(Number(item.p_location_x),Number(item.p_location_y));
 		                });
 		            });
 					
@@ -234,9 +256,10 @@
 		    
 	        setInterval(() => {
 				moving();
-			}, 2000);
+			}, 10000);
 		    getListGroup('carList');
 		    map();
+		    initPano(37.368856,127.324209);
 		    
 		}); // end of ready function
 		
@@ -273,10 +296,10 @@
               <a class="nav-link" href="logout.can">로그아웃</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Services</a>
+              <a class="nav-link" href="#" onclick="simulation()">Simulation</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
+              <a class="nav-link" href="#">Reset</a>
             </li>
           </ul>
         </div>
@@ -309,20 +332,22 @@
          <div class="card mt-4">
             <div class="card-body card-map">
               <!-- <h3 class="card-title">MAP</h3>
-              <h4></h4>
               <p class="card-text">이곳에 지도가 위치합니다.</p> -->
             </div>
          </div>
           <!-- /.card -->
-		 
-		 	<div class="card card-outline-secondary my-4">
+		 	<div class="row">
+		 	<div class="card card-outline-secondary my-4 col-lg-8">
 				<div class="card-header">차량 상세 정보</div>
-				<div class="card-body card-status" id="carstatus">
-					
+				<div class="card-body card-status " id="carstatus">
+					<!-- 이곳에 상세정보가 위치합니다 -->
 				</div>
 			</div>
+			<div class="card-body col-lg-4" id="streetMap">
+					<!-- 이곳에 스트리트 맵이 위치합니다. -->
+				</div>
 			<!-- /.card -->	
-
+			</div>
         </div>
         <!-- /.col-lg-9 -->
 
@@ -345,11 +370,13 @@
     <!-- <script src="/fleet/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
     <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"/>"></script>
 	
+
+	
 	<script>
 	//map display
-
-	</script>
 	
+	</script>
+	<script src="http://maps.google.com/maps/api/js?sensor=false&key=AIzaSyD4gVzisCa3cQKKe62jpjGYAl8E6UytmQA&callback=initPano"></script>
   </body>
 
 </html>

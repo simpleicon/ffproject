@@ -55,7 +55,7 @@ public class AdminController {
 	@RequestMapping("/login")
 	public ModelAndView login(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("main");
+		mav.setViewName("redirect:main.can");
 		String a_id = req.getParameter("a_id");
 		String a_pw = req.getParameter("a_pw");
 		Admin dbadmin = null;

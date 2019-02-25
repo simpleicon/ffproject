@@ -31,6 +31,7 @@ public class PadController {
 	@Resource(name="csbiz")
 	Biz csbiz;
 	
+	//TCP/IP통신을 위한 server start
 	@RequestMapping("/main")
 	public ModelAndView main() {
 		ModelAndView mav = new ModelAndView();
@@ -45,7 +46,7 @@ public class PadController {
 		return mav;
 	}
 	
-	
+	//제어컨트롤러에서 http로 요청한 신호 처리
 	@ResponseBody
 	@RequestMapping("/control")
 	public void controlSignal(HttpServletRequest req) {
@@ -56,7 +57,7 @@ public class PadController {
 		String cur_load = null;
 		String cur_locx = null;
 		String cur_locy = null;
-		a_id = "id01";
+		a_id = "id01"; // 제어컨트롤러에서 관리자 id를 보내는 코드가 작성되지 않아 고정으로 넣어둔 id
 		int cmd = Integer.parseInt(value.substring(3,11));
 		int can_value = Integer.parseInt(value.substring(11,27));
 		
@@ -65,7 +66,6 @@ public class PadController {
 			cur_load = car.getCur_load();
 			cur_locx = car.getCur_location_x();
 			cur_locy = car.getCur_location_y();
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -101,16 +101,16 @@ public class PadController {
 			String p_locx = cur_locx;
 			String p_locy = cur_locy;
 			if(can_value == 10) {
-				locx += 0.00001;
+				locx += 0.0001;
 				p_locx = String.valueOf(locx);
 			}else if(can_value==11) {
-				locx -= 0.00001;
+				locx -= 0.0001;
 				p_locx = String.valueOf(locx);
 			}else if(can_value==12) {
-				locy += 0.00001;
+				locy += 0.0001;
 				p_locy = String.valueOf(locy);
 			}else if(can_value==13) {
-				locy += 0.00001;
+				locy += 0.0001;
 				p_locy = String.valueOf(locy);
 			}
 			WorkPlan wp = new WorkPlan(Integer.parseInt(car_id), a_id, p_locx, p_locy, "-");
@@ -152,9 +152,23 @@ public class PadController {
 				System.out.println("status update error");
 				e.printStackTrace();
 			}
-			
 		}else if(can_id.equals("20")) {
-			
+			CarStatus status = new CarStatus();
+			try {
+				status = (CarStatus) csbiz.get(carid);
+				int battery = Integer.parseInt(value.substring(2,5));
+				int chargest = Integer.parseInt(value.substring(5));
+				if(chargest == 1) {
+					status.setCharge("ON");
+				}else if(chargest == 0) {
+					status.setCharge("OFF");
+				}
+				status.setBattery(battery);
+				csbiz.modify(status);
+			} catch (Exception e) {
+				System.out.println("battery update fail");
+				e.printStackTrace();
+			}
 		}else if(can_id.equals("30")) {
 			Car car = new Car();
 			String load = null;

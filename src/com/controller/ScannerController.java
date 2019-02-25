@@ -20,6 +20,9 @@ import com.vo.WorkPlan;
 
 @Controller
 public class ScannerController {
+	//simulation을 위한 컨트롤러
+	//padController와 기능은 비슷하나 pad로의 전송을 하지 않는다.
+	
 	@Resource(name="whbiz")
 	Biz2 whbiz;
 	@Resource(name="wpbiz")
@@ -33,12 +36,10 @@ public class ScannerController {
 	@RequestMapping("/simulation")
 	public void simulation() {
 		try {
-			// 파일 객체 생성
 			File file = new File("C:\\simulation.txt");
-			// 스캐너로 파일 읽기
 			Scanner scan = new Scanner(file);
 			while (scan.hasNextLine()) {
-				/*201100010*/String data = scan.nextLine();
+				/*ex) 201100010*/String data = scan.nextLine();
 				
 				try {
 					Thread.sleep(2000);
@@ -128,16 +129,16 @@ public class ScannerController {
 					String p_locx = cur_locx;
 					String p_locy = cur_locy;
 					if(can_value == 10) {
-						locx += 0.00001;
+						locx += 0.0001;
 						p_locx = String.valueOf(locx);
 					}else if(can_value==11) {
-						locx -= 0.00001;
+						locx -= 0.0001;
 						p_locx = String.valueOf(locx);
 					}else if(can_value==12) {
-						locy += 0.00001;
+						locy += 0.0001;
 						p_locy = String.valueOf(locy);
 					}else if(can_value==13) {
-						locy += 0.00001;
+						locy += 0.0001;
 						p_locy = String.valueOf(locy);
 					}
 					WorkPlan wp = new WorkPlan(Integer.parseInt(car_id), a_id, p_locx, p_locy, "-");
@@ -190,6 +191,26 @@ public class ScannerController {
 					}
 					System.out.println(car_id+"  "+ value);
 //					server.sendMsg(value);
+				}else if(cmd==20) {
+					CarStatus status = new CarStatus();
+					try {
+						status = (CarStatus) csbiz.get(car_id);
+						int charge = Integer.parseInt(value.substring(5));
+						String setcharge = null;
+						if(charge == 1) {
+							setcharge = "ON";
+						}else {
+							setcharge = "OFF";
+						}
+						status.setCharge(setcharge);
+						int battery = Integer.parseInt(value.substring(2,5));
+						status.setBattery(battery);
+						csbiz.modify(status);
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					System.out.println(car_id+"  "+ value);
 				}
 				
 				

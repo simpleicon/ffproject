@@ -55,7 +55,7 @@
 		<div class="col-lg-3"></div>
         <div class="col-lg-6">
           <div class="card mt-4">
-            <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
+            <img class="card-img-top img-fluid" src="resources/icon_img/forklift.PNG" alt="img">
             <div class="card-body">
             
             <!-- Login Form -->
