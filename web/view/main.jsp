@@ -72,7 +72,21 @@
 	    			alert('error simulation');
 	    		}
 	    	})
-	    }
+	    };
+	    
+	    //db내 차량 정보 reset
+	    function reset(){
+	    	var url = "reset.can";
+	    	$.ajax({
+	    		url : url,
+	    		success : function(data){
+	    			
+	    		},
+	    		error : function(){
+	    			alert('reset error');
+	    		}
+	    	})
+	    };
 		
         //map markers from db
         function carMarker(googleMap){
@@ -92,10 +106,14 @@
 		                    /* animation:google.maps.Animation.DROP, */
 		                    label:String(item.car_id)
 		                });
+		                if(item.cur_load == "적재중"){
+		                	marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');	
+	                    }
+		                
 		                googleMarkers.push(marker);
 		                /* marker.setMap(map); */
 		                var infowindow = new google.maps.InfoWindow({
-		                    content:item.car_name //html문서처럼 만든 것을 변수로 넣자
+		                    content:item.car_name
 		                    
 		                });
 		                marker.addListener('click',function(){
@@ -299,7 +317,7 @@
               <a class="nav-link" href="#" onclick="simulation()">Simulation</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Reset</a>
+              <a class="nav-link" href="#" onclick="reset()">Reset</a>
             </li>
           </ul>
         </div>

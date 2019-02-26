@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		UPDATE TB_WORK_HISTORY SET WORK_STATUS=#{work_status},END_TIME=SYSDATE WHERE HISTORY_NUM=#{history_num}
 	</update>
 	<delete id="delete" parameterType="String">
-		DELETE FROM TB_WORK_HISTORY WHERE HISTORY_NUM=#{obj}
+		DELETE FROM TB_WORK_HISTORY WHERE HISTORY_NUM >=#{obj}
 	</delete>
 	
 </mapper>

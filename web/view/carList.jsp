@@ -6,8 +6,7 @@
 	<div class="card-body car-list">
 	<c:forEach var="car" items="${list}">
 		<div class="row">
-			<div onclick="getStatus(${car.car_id})" class ="car_id" id="${car.car_id }">${car.car_name }</div> <br>
-			<hr>
+			<button onclick="getStatus(${car.car_id})" class ="car_id col-lg-12 list-group-item" id="${car.car_id }">${car.car_name }</button>
 		</div>
 	</c:forEach>
 		<!-- <a href="#" class="btn btn-success">Leave a Review</a> -->

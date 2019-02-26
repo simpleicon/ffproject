@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		UPDATE TB_WORK_PLAN SET P_LOCATION_X=#{p_location_x},P_LOCATION_Y=#{p_location_y},P_LOAD=#{p_load} WHERE PLAN_NUM=#{plan_num}
 	</update>
 	<delete id="delete" parameterType="String">
-		DELETE FROM TB_WORK_PLAN WHERE PLAN_NUM=#{obj}
+		DELETE FROM TB_WORK_PLAN WHERE PLAN_NUM >=#{obj}
 	</delete>
 	
 </mapper>

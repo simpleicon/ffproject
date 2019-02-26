@@ -92,10 +92,10 @@ public class ScannerController {
 								car = (Car) cbiz.get(car_id);
 								if(can_value==10) {
 									load = "적재중";
-									workStatus ="작업중";
+									workStatus ="작업완료.";
 								}else if(can_value==11) {
 									load = "미적재";
-									workStatus = "작업중";
+									workStatus = "작업완료.";
 								}
 								WorkHistory wh = new WorkHistory(Integer.parseInt(car_id), workStatus);
 								
@@ -103,15 +103,15 @@ public class ScannerController {
 								cbiz.modify(car);
 								whbiz.register(wh);
 								
-								ArrayList<WorkHistory> list = null;
-								WorkHistory updateWh = new WorkHistory();
-								list = whbiz.get();
-								updateWh = list.get(list.size()-1);
-								Thread.sleep(2000);
-								workStatus = "작업완료";
-								System.out.println("load hisnum :"+updateWh.getHistory_num());
-								updateWh.setWork_status(workStatus);
-								whbiz.modify(updateWh);
+//								ArrayList<WorkHistory> list = null;
+//								WorkHistory updateWh = new WorkHistory();
+//								list = whbiz.get();
+//								updateWh = list.get(list.size()-1);
+//								Thread.sleep(2000);
+//								workStatus = "작업완료";
+//								System.out.println("load hisnum :"+updateWh.getHistory_num());
+//								updateWh.setWork_status(workStatus);
+								whbiz.modify(wh);
 							} catch (Exception e) {
 								System.out.println("load update failed");
 								e.printStackTrace();
@@ -153,21 +153,21 @@ public class ScannerController {
 						
 						car.setCur_location_x(p_locx);
 						car.setCur_location_y(p_locy);
-						workStatus = "작업중";
+						workStatus = "작업완료.";
 						cbiz.modify(car);
 						WorkHistory wh = new WorkHistory(Integer.parseInt(car_id), workStatus);
 						whbiz.register(wh);
 						
 						////
-						ArrayList<WorkHistory> list = null;
-						WorkHistory updateWh = new WorkHistory();
-						list = whbiz.get();
-						updateWh = list.get(list.size()-1);
-						Thread.sleep(2000);
-						workStatus = "작업완료";
-						System.out.println("move hisnum :"+updateWh.getHistory_num());
-						updateWh.setWork_status(workStatus);
-						whbiz.modify(updateWh);
+//						ArrayList<WorkHistory> list = null;
+//						WorkHistory updateWh = new WorkHistory();
+//						list = whbiz.get();
+//						updateWh = list.get(list.size()-1);
+//						
+//						workStatus = "작업완료";
+//						System.out.println("move hisnum :"+updateWh.getHistory_num());
+//						updateWh.setWork_status(workStatus);
+						whbiz.modify(wh);
 					} catch (Exception e) {
 						System.out.println("moving wp insert error");
 						e.printStackTrace();
@@ -199,6 +199,11 @@ public class ScannerController {
 						String setcharge = null;
 						if(charge == 1) {
 							setcharge = "ON";
+							if(!car.getCur_location_x().equals("37.368305") && !car.getCur_location_y().equals("127.323782")) {
+								car.setCur_location_x("37.368305");
+								car.setCur_location_y("127.323782");
+								cbiz.modify(car);
+							}
 						}else {
 							setcharge = "OFF";
 						}
@@ -213,17 +218,80 @@ public class ScannerController {
 					System.out.println(car_id+"  "+ value);
 				}
 				
-				
-				
-				
-				
-				
 			}
-			// System.out.println(scan.useDelimiter("\\z").next());
 		} catch (FileNotFoundException e) {
 			// TODO: handle exception
 		}
 		
 	}
-
+	
+	@ResponseBody
+	@RequestMapping("/reset")
+	public void reset() {
+		Car car = new Car();
+		CarStatus status = new CarStatus();
+		String load = "미적재";
+		String charge = "OFF";
+		String ignition = "OFF";
+		try {
+			//101
+			car = (Car) cbiz.get("101");
+			car.setCur_load(load);
+			car.setCur_location_x("37.369549");
+			car.setCur_location_y("127.324461");
+			cbiz.modify(car);
+			status = (CarStatus)csbiz.get("101");
+			status.setBattery(75);
+			status.setCharge(charge);
+			status.setIgnition(ignition);
+			csbiz.modify(status);
+			//201
+			car = (Car) cbiz.get("201");
+			car.setCur_load(load);
+			car.setCur_location_x("37.368561");
+			car.setCur_location_y("127.324704");
+			cbiz.modify(car);
+			status = (CarStatus)csbiz.get("201");
+			status.setBattery(75);
+			status.setCharge(charge);
+			status.setIgnition(ignition);
+			csbiz.modify(status);
+			
+			
+			//301
+			car = (Car) cbiz.get("301");
+			car.setCur_load(load);
+			car.setCur_location_x("37.368858");
+			car.setCur_location_y("127.324134");
+			cbiz.modify(car);
+			status = (CarStatus)csbiz.get("301");
+			status.setBattery(75);
+			status.setCharge(charge);
+			status.setIgnition(ignition);
+			csbiz.modify(status);
+			
+			//401
+			car = (Car) cbiz.get("401");
+			car.setCur_load(load);
+			car.setCur_location_x("37.369135");
+			car.setCur_location_y("127.325019");
+			cbiz.modify(car);
+			status = (CarStatus)csbiz.get("401");
+			status.setBattery(75);
+			status.setCharge(charge);
+			status.setIgnition(ignition);
+			csbiz.modify(status);
+			
+			
+			//history, plan delete
+			whbiz.remove("1");
+			wpbiz.remove("1");
+			System.out.println("reset");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 }

@@ -28,11 +28,14 @@ input[type=text]:focus, input[type=password]:focus {
 }
 table{
 	width: 100%;
-	margin: -15px;
+	margin: 0px;
 }
 
 tr, th, td{
 	border: 1px solid black;
+}
+.table td, .table th{
+	padding: .3rem;
 }
 
 .loginpage{
@@ -48,7 +51,10 @@ tr, th, td{
 }
 .car-list{
 	min-height: 600px;
+	padding : 10px;
+	text-align: center;
 }
+
 .card-status{
 	min-height: 150px;
 }

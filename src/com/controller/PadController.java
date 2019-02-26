@@ -154,16 +154,24 @@ public class PadController {
 			}
 		}else if(can_id.equals("20")) {
 			CarStatus status = new CarStatus();
+			Car car = new Car();
 			try {
 				status = (CarStatus) csbiz.get(carid);
+				car = (Car) cbiz.get(carid);
 				int battery = Integer.parseInt(value.substring(2,5));
 				int chargest = Integer.parseInt(value.substring(5));
 				if(chargest == 1) {
 					status.setCharge("ON");
+					if(!car.getCur_location_x().equals("37.368305") && !car.getCur_location_y().equals("127.323782")) {
+						car.setCur_location_x("37.368305");
+						car.setCur_location_y("127.323782");
+						cbiz.modify(car);
+					}
 				}else if(chargest == 0) {
 					status.setCharge("OFF");
 				}
 				status.setBattery(battery);
+				
 				csbiz.modify(status);
 			} catch (Exception e) {
 				System.out.println("battery update fail");
